@@ -1,0 +1,6 @@
+[
+{
+  "directory": "/home/eden/CollegeLearningRepo/DS_CurriculumDesign/AVLTree",
+  "arguments": ["/usr/local/bin/gcc", "-c", "-m64", "-std=c++20", "-o", "build/.objs/AVLTree/linux/x86_64/src/main.cpp.o", "src/main.cpp"],
+  "file": "src/main.cpp"
+}]
