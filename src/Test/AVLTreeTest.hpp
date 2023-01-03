@@ -18,19 +18,20 @@
 
 namespace Test {
 
-using std::cout, std::endl;
+using std::cout;
+using std::endl;
 
 void AVLTreeTest() {
     Utility::AVLTree<int> tree { 1, 3, 7, 4, 5, 9, 2 };
     tree.print();
-    cout << "size: " << tree.get_size() << endl;
+    cout << "size: " << tree.size() << endl;
     cout << endl;
 
     // test insert `existing` element
     for (auto toInsert : { 3, 4, 5, 9 }) {
         tree.insert(toInsert);
         tree.print();
-        cout << "size: " << tree.get_size() << endl;
+        cout << "size: " << tree.size() << endl;
         cout << endl;
     }
 
@@ -38,7 +39,7 @@ void AVLTreeTest() {
     for (auto toInsert : { 0, 6, 8, 10 }) {
         tree.insert(toInsert);
         tree.print();
-        cout << "size: " << tree.get_size() << endl;
+        cout << "size: " << tree.size() << endl;
         cout << endl;
     }
 
@@ -46,7 +47,7 @@ void AVLTreeTest() {
     for (auto toRemove : { 3, 4, 5, 9 }) {
         tree.remove(toRemove);
         tree.print();
-        cout << "size: " << tree.get_size() << endl;
+        cout << "size: " << tree.size() << endl;
         cout << endl;
     }
 
@@ -54,23 +55,23 @@ void AVLTreeTest() {
     for (auto toRemove : { 3, 4, 5, 9 }) {
         tree.remove(toRemove);
         tree.print();
-        cout << "size: " << tree.get_size() << endl;
+        cout << "size: " << tree.size() << endl;
         cout << endl;
     }
 
     // test copy construct/assignment
     Utility::AVLTree<int> copied = tree;
     copied.print();
-    cout << "size: " << copied.get_size() << endl;
+    cout << "size: " << copied.size() << endl;
     cout << endl;
 
     // test move construct/assignment
     Utility::AVLTree<int> moved = std::move(copied);
     moved.print();
-    cout << "size: " << moved.get_size() << endl;
+    cout << "size: " << moved.size() << endl;
     cout << endl;
     copied.print();
-    cout << "size: " << copied.get_size() << endl;
+    cout << "size: " << copied.size() << endl;
     cout << endl;
 
     // test print_in_layer()
@@ -78,6 +79,10 @@ void AVLTreeTest() {
 
     // test assert_if_in_order()
     moved.assert_if_in_order();
+
+    // test height()
+    cout << "height: " << moved.height() << endl;
+    cout << endl;
 }
 
 } // namespace Test

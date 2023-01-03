@@ -36,7 +36,7 @@ class AVLTree {
 
     Node* root = nullptr;
 
-    int size = 0;
+    int _size = 0;
 
     /**
      * @brief return height of `node`
@@ -126,7 +126,7 @@ class AVLTree {
             // create a new node
             node       = new Node();
             node->data = data;
-            ++size;
+            ++_size;
         } else if (data < node->data) {
             // insert to left
             node->left = insert(data, node->left);
@@ -227,7 +227,7 @@ class AVLTree {
                 node = node->left;
             }
             delete temp;
-            --size;
+            --_size;
         }
 
         // now, the correct node has been removed
@@ -356,10 +356,10 @@ public:
      * @param other
      */
     AVLTree(AVLTree&& other) noexcept
-        : size(other.size)
+        : _size(other._size)
         , root(other.root) {
-        other.root = nullptr;
-        other.size = 0;
+        other.root  = nullptr;
+        other._size = 0;
     }
 
     /**
@@ -369,10 +369,10 @@ public:
      * @return AVLTree&
      */
     AVLTree& operator=(AVLTree&& other) noexcept {
-        size       = other.size;
-        root       = other.root;
-        other.root = nullptr;
-        other.size = 0;
+        _size       = other._size;
+        root        = other.root;
+        other.root  = nullptr;
+        other._size = 0;
     }
 
     /**
@@ -386,7 +386,6 @@ public:
     void insert(const T& data) {
         root = insert(data, root);
     }
-
     void remove(const T& data) {
         root = remove(data, root);
     }
@@ -399,7 +398,6 @@ public:
         print(root);
         cout << endl;
     }
-
     void print_in_layer() {
         if (root == nullptr) {
             cout << "empty tree!" << endl;
@@ -426,7 +424,6 @@ public:
         }
         cout << endl;
     }
-
     void assert_if_in_order() {
         std::stack<Node*> stack;
         std::vector<T>    expand;
@@ -453,12 +450,11 @@ public:
     T findMin() {
         return findMin(root)->data;
     }
-
     T findMax() {
         return findMax(root)->data;
     }
 
-    bool contains(T data) {
+    bool contains(const T& data) {
         Node* node = root;
         while (node != nullptr) {
             if (data < node->data) {
@@ -471,17 +467,17 @@ public:
         }
         return false;
     }
-
     bool isEmpty() {
         return root == nullptr;
     }
 
-    int get_height() {
+    // height starts from 0, should >= 0
+    int height() {
         return height(root);
     }
-
-    int get_size() {
-        return size;
+    // size starts from 0, should >= 0
+    int size() {
+        return _size;
     }
 };
 
