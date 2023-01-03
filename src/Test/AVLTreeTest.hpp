@@ -72,6 +72,12 @@ void AVLTreeTest() {
     copied.print();
     cout << "size: " << copied.get_size() << endl;
     cout << endl;
+
+    // test print_in_layer()
+    moved.print_in_layer();
+
+    // test assert_if_in_order()
+    moved.assert_if_in_order();
 }
 
 } // namespace Test

@@ -15,11 +15,14 @@
 #include <concepts>
 #include <initializer_list>
 #include <iostream>
+#include <queue>
 #include <stack>
+#include <stdexcept>
 
 namespace Utility {
 
-using std::cout, std::endl;
+using std::cout;
+using std::endl;
 
 template <class T>
 requires std::three_way_comparable<T>
@@ -389,7 +392,61 @@ public:
     }
 
     void print() {
+        if (root == nullptr) {
+            cout << "empty tree!" << endl;
+            return;
+        }
         print(root);
+        cout << endl;
+    }
+
+    void print_in_layer() {
+        if (root == nullptr) {
+            cout << "empty tree!" << endl;
+            cout << endl;
+            return;
+        }
+        std::queue<Node*> queue;
+        queue.push(root);
+        while (!queue.empty()) {
+            size_t curr_layer_size = queue.size();
+            while (curr_layer_size > 0) {
+                auto node = queue.front();
+                cout << node->data << " ";
+                if (node->left) {
+                    queue.push(node->left);
+                }
+                if (node->right) {
+                    queue.push(node->right);
+                }
+                queue.pop();
+                --curr_layer_size;
+            }
+            cout << endl;
+        }
+        cout << endl;
+    }
+
+    void assert_if_in_order() {
+        std::stack<Node*> stack;
+        std::vector<T>    expand;
+        Node*             node = root;
+        while (node || !stack.empty()) {
+            while (node) {
+                stack.push(node);
+                node = node->left;
+            }
+            node = stack.top();
+            expand.push_back(node->data);
+            stack.pop();
+            node = node->right;
+        }
+        for (size_t i = 1; i < expand.size(); ++i) {
+            if (expand.at(i - 1) >= expand.at(i)) {
+                throw std::runtime_error("not in order!");
+            }
+        }
+        cout << "in order!" << endl;
         cout << endl;
     }
 
