@@ -9,9 +9,11 @@
  *
  */
 
+#include "TaskManager.hpp"
 #include "Test/AVLTreeTest.hpp"
 
 int main(int argc, char** argv) {
-    Test::AVLTreeTest();
+    // Test::AVLTreeTest();
+    Task::run_all_tasks();
     return 0;
 }
