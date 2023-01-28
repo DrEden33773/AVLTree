@@ -13,7 +13,7 @@
 #include "Test/AVLTreeTest.hpp"
 
 int main(int argc, char** argv) {
-    // Test::AVLTreeTest();
-    Task::run_all_tasks();
+    Test::AVLTreeTest();
+    // Task::run_all_tasks();
     return 0;
 }
